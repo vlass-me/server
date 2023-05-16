@@ -12,12 +12,14 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
+
 def get_env_variable(var_name):
-  try:
-    return os.environ[var_name]
-  except KeyError:
-    error_msg = 'Set the {} environment variable'.format(var_name)
-    raise ImproperlyConfigured(error_msg)
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = 'Set the {} environment variable'.format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_variable("SECRET_KEY")
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'corsheaders',
+    'drf_yasg',
 
     # DRF
     'rest_framework',
@@ -63,17 +66,17 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 AUTH_USER_MODEL = 'user.User'
 ACCOUNT_USER_MODEL_EMAIL_FIELD = None  # email 필드 사용 x
 ACCOUNT_EMAIL_REQUIRED = False
-ACCOUNT_EMAIL_VERIFICATION = 'none'  
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # 이거 해도 안먹음 ㅠㅠ
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # 이거 해도 안먹음 ㅠㅠ
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', # 인증된 사용자만 접근
-        'rest_framework.permissions.IsAdminUser', # 관리자만 접근
+        'rest_framework.permissions.IsAuthenticated',  # 인증된 사용자만 접근
+        'rest_framework.permissions.IsAdminUser',  # 관리자만 접근
         'rest_framework.permissions.AllowAny',  # 누구나 접근
     ),
 }
