@@ -49,5 +49,5 @@ class Session(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='session')
     subject = models.CharField(max_length=100)
     date = models.DateField()
-    quiz = models.TextField()
-    summary = models.TextField()
+    quiz = models.TextField(null=True, blank=True)
+    summary = models.TextField(null=True, blank=True)
