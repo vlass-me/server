@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 
 class Session(models.Model):
-    sessionID = models.AutoField(primary_key=True)
+    sessionID = models.BigAutoField(primary_key=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='session')
     subject = models.CharField(max_length=100)
     date = models.DateField()

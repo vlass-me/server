@@ -4,5 +4,5 @@ from .models import Session
 
 # Create your views here.
 class SessionViewSet(ModelViewSet):
-    queryset = Session
+    queryset = Session.objects.all()
     serializer_class = SessionSerializer

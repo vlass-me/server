@@ -6,7 +6,7 @@ from .views import SessionViewSet
 
 router = DefaultRouter()
 
-router.register('session', SessionViewSet)
+router.register(r'session', SessionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'allauth.account',
 
     # application
-    'user',
+    'user.apps.UserConfig',
 ]
 
 SITE_ID = 1
