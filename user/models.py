@@ -42,3 +42,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+    
+
+class Session(models.Model):
+    sessionID = models.AutoField(primary_key=True)
+    userID = models.ForeignKey(User, on_delete=models.CASCADE, related_name='session')
+    subject = models.CharField(max_length=100)
+    date = models.DateField()
+    quiz = models.TextField()
+    summary = models.TextField()
