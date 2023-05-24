@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
     # application
     'user.apps.UserConfig',
+    'gpt.apps.GptConfig',
 ]
 
 SITE_ID = 1
