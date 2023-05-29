@@ -27,10 +27,16 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'https://port-0-server-das6e2dli93cycv.sel4.cloudtype.app',
+    '34.64.57.134',
+    'localhost',
+]
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://port-0-server-das6e2dli93cycv.sel4.cloudtype.app'
+    'https://port-0-server-das6e2dli93cycv.sel4.cloudtype.app',
+    'https://34.64.57.134',
+    'http://34.64.57.134',
 ]
 
 # Application definition
