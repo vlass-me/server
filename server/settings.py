@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'https://port-0-server-das6e2dli93cycv.sel4.cloudtype.app',
     '34.64.57.134',
+    '34.64.73.77',
     'localhost',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
@@ -37,6 +38,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://port-0-server-das6e2dli93cycv.sel4.cloudtype.app',
     'https://34.64.57.134',
     'http://34.64.57.134',
+    'http://34.64.73.77/',
+
 ]
 
 # Application definition
