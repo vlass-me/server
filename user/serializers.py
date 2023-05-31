@@ -1,7 +1,13 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import Session
 
-class SessionSerializer(ModelSerializer):
+
+class SessionSerializer(serializers.ModelSerializer):
+    hashtag = serializers.SerializerMethodField()
+
     class Meta:
         model = Session
-        fields = '__all__'
+        fields = ['sessionID', 'userID', 'date', 'quiz', 'summary', 'hashtag']
+
+    def get_hashtag(self, obj):
+        return list(obj.hashtag.values_list('hashtag', flat=True))

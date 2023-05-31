@@ -1,12 +1,33 @@
-from rest_framework.viewsets import ModelViewSet
+from .models import Session, Session_hashtag
+from rest_framework.response import Response
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 from .serializers import SessionSerializer
 from .models import Session
-
-# Create your views here.
 
 
 class SessionViewSet(ModelViewSet):
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
     permission_classes = (IsAuthenticated,)
+
+    def create(self, request, *args, **kwargs):
+        hashtag_data = request.data.pop('hashtag', [])
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        session_instance = serializer.instance
+        hashtag_objects = []
+
+        for hashtag in hashtag_data:
+            hashtag_object, _ = Session_hashtag.objects.get_or_create(
+                hashtag=hashtag)
+            hashtag_objects.append(hashtag_object)
+
+        session_instance.hashtag.set(hashtag_objects)
+        session_instance.save()
+
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=201, headers=headers)
