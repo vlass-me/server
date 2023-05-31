@@ -49,7 +49,7 @@ class Session(models.Model):
     sessionID = models.BigAutoField(primary_key=True)
     userID = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='session')
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     quiz = models.TextField(null=True, blank=True)
     summary = models.TextField(null=True, blank=True)
 

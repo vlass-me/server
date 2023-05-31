@@ -12,9 +12,14 @@ class SessionViewSet(ModelViewSet):
     serializer_class = SessionSerializer
     permission_classes = (IsAuthenticated,)
 
+    def get_queryset(self):
+        return super().get_queryset().filter(userID=self.request.user)
+
     def create(self, request, *args, **kwargs):
         hashtag_data = request.data.pop('hashtag', [])
-        serializer = self.get_serializer(data=request.data)
+        data = request.data
+        data['userID'] = request.user.pk
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
 
